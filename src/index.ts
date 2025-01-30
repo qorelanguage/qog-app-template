@@ -11,7 +11,7 @@ const CustomActionOptions = {
     type: 'string',
     required: true,
     short_desc: 'Message to be displayed',
-    display_name: 'Tes Message',
+    display_name: 'Test Message',
   },
 } satisfies TQoreOptions;
 
@@ -29,7 +29,7 @@ const CustomActionResponse = {
 } satisfies TQoreResponseType;
 
 const CustomAction = {
-  action: 'custom-Action',
+  action: 'custom-action',
   app: 'Custom-app',
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Custom App Action',
