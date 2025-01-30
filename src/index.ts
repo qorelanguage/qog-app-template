@@ -34,6 +34,7 @@ const CustomAction = {
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Custom App Action',
   options: CustomActionOptions,
+  short_desc: 'Custom App Action',
   api_function: (data) => {
     return {
       message: `Server received message: ${data?.message}`,
