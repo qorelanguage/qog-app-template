@@ -1,49 +1,9 @@
-import {
-  EQoreAppActionCode,
-  IQoreAppActionWithFunction,
-  IQoreAppWithActions,
-  TQoreOptions,
-  TQoreResponseType,
-} from '@qoretechnologies/ts-toolkit';
+import { QoreAppCreator } from '@qoretechnologies/ts-toolkit';
+import { CustomAction } from './actions/custom-aciton';
+import { CustomEventFunctionTrigger } from './triggers/custom-event-function-trigger';
+import { CustomWebhookTrigger } from './triggers/custom-webhook-trigger';
 
-const CustomActionOptions = {
-  message: {
-    type: 'string',
-    required: true,
-    short_desc: 'Message to be displayed',
-    display_name: 'Test Message',
-  },
-} satisfies TQoreOptions;
-
-const CustomActionResponse = {
-  type: 'hash',
-  fields: {
-    message: {
-      type: 'string',
-      required: true,
-      display_name: 'Server Response',
-      short_desc: 'Response from the server',
-      example_value: 'Server response message',
-    },
-  },
-} satisfies TQoreResponseType;
-
-const CustomAction = {
-  action: 'custom-action',
-  app: 'Custom-app',
-  action_code: EQoreAppActionCode.ACTION,
-  display_name: 'Custom App Action',
-  options: CustomActionOptions,
-  short_desc: 'Custom App Action',
-  api_function: (data) => {
-    return {
-      message: `Server received message: ${data?.message}`,
-    };
-  },
-  response_type: CustomActionResponse,
-} satisfies IQoreAppActionWithFunction<typeof CustomActionOptions, typeof CustomActionResponse>;
-
-const CustomApp = {
+const CustomApp = QoreAppCreator.createApp({
   name: 'Custom-app',
   display_name: 'Custom Test App',
   desc: 'This is a custom testing app',
@@ -80,7 +40,7 @@ const CustomApp = {
     oauth2_token_url: 'https://example.com/token',
     url: 'tsrest-qorus-js-test://www.example.com/api',
   },
-  actions: [CustomAction],
-} satisfies IQoreAppWithActions;
+  actions: [CustomAction, CustomEventFunctionTrigger, CustomWebhookTrigger],
+});
 
 export default CustomApp;
