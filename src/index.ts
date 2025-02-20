@@ -1,46 +1,70 @@
 import { QoreAppCreator } from '@qoretechnologies/ts-toolkit';
-import { CustomAction } from './actions/custom-aciton';
-import { CustomEventFunctionTrigger } from './triggers/custom-event-function-trigger';
-import { CustomWebhookTrigger } from './triggers/custom-webhook-trigger';
+import { MONDAY_APP_NAME } from './constants';
+import * as MondayActions from './actions';
+import * as MondayTriggers from './triggers';
+const actions = Object.values(MondayActions);
+const triggers = Object.values(MondayTriggers);
 
-const CustomApp = QoreAppCreator.createApp({
-  name: 'Custom-app',
-  display_name: 'Custom Test App',
-  desc: 'This is a custom testing app',
-  short_desc: 'Custom testing app',
+const MondayApp = QoreAppCreator.createApp({
+  name: MONDAY_APP_NAME,
+  display_name: 'Monday',
+  desc: 'Monday.com is a cloud-based Work Operating System (Work OS).',
+  short_desc:
+    'Enables teams to build custom workflows and applications to manage' +
+    'projects, processes, and everyday tasks efficiently.',
+
+  actions: [...actions, ...triggers],
 
   logo:
-    'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUF' +
-    'VCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2' +
-    'ZzExLmR0ZCI+Cjxzdmcgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDYzIDYzIiB2ZXJzaW9uPSIxLj' +
-    'EiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkv' +
-    'eGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zOnNlcmlmPSJodHRwOi8vd3d3LnNlcmlmLmNvbS8iIHN0eWxlPSJmaW' +
-    'xsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6' +
-    'MjsiPgogICAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsMSwtMTAuNzUxOCwtMjIuNzE5KSI+CiAgICAgICAgPHBhdGggZD' +
-    '0iTTY4LjM2Myw2My45NzNMNjguMzYzLDQwLjEwOUM2OC4zNjMsNDAuMTA5IDY4LjM2MywzNy4xMTMgNjUuNzY4LDM1LjYxNUw0' +
-    'NS4xMDIsMjMuNjgzQzQ1LjEwMiwyMy42ODMgNDIuNTA3LDIyLjE4NSAzOS45MTIsMjMuNjgzTDE5LjI0NSwzNS42MTVDMTkuMj' +
-    'Q1LDM1LjYxNSAxNi42NSwzNy4xMTMgMTYuNjUsNDAuMTA5TDE2LjY1LDYzLjk3M0MxNi42NSw2My45NzMgMTYuNjUsNjYuOTY5' +
-    'IDE5LjI0NSw2OC40NjdMNDcuODM5LDg0LjgyMkM0Ny44MzksODQuODIyIDUwLjQzNCw4Ni4zNjggNTMuMDI5LDg0Ljg3TDY0Lj' +
-    'Y1Miw3OC4xMTJMNDIuNTIsNjUuNTAzTDQyLjUwNyw2NS41MTFMMzAuODQzLDU4Ljc3NkwzMC44NDMsNDUuMzA3TDQyLjUwNywz' +
-    'OC41NzNMNTQuMTcxLDQ1LjMwN0w1NC4xNzEsNTguNzc2TDQ1LjIxMyw2My45NDhMNTkuNTY1LDcyLjA1TDY1Ljc2OCw2OC40Nj' +
-    'lDNjUuNzY5LDY4LjQ2OCA2OC4zNjMsNjYuOTcgNjguMzYzLDYzLjk3MyIgc3R5bGU9ImZpbGw6cmdiKDAsMjMxLDI1NSk7Zmls' +
-    'bC1ydWxlOm5vbnplcm87Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=',
-  logo_file_name: 'test.svg',
+    `PHN2ZyBoZWlnaHQ9IjE1NDkiIHZpZXdCb3g9Ii0xLjY2IC00LjEwMjA0OTMyID` +
+    `I0My4wNSAxNDcuNTEyMDQ5MzIiIHdpZHRoPSIyNTAwIiB4bWxucz0iaHR0cDov` +
+    `L3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0xMjAuMjQgMTQzLjE2Yy` +
+    `D0xMC42My0uMjYtMTkuNC00Ljk1LTI1LTE0Ljc0LTUuNzQtMTAuMTItNS40OS0` +
+    `yMC40OC42My0zMC4zNSAxNC41Ny0yMy40OSAyOS4zMy00Ni44NSA0NC03MC4yN` +
+    `yAzLTQuNzkgNS45My05LjY1IDkuMDctMTQuMzVhMjkuNCAyOS40IDAgMCAxIDQ` +
+    `wLTkuMDljMTMuODEgOC41MSAxOC40MyAyNi4yMSA5LjgzIDQwLjE2cS0yNi4zN` +
+    `yA0Mi45NS01My40OSA4NS40OGMtNS41NyA4Ljc3LTE0LjAyIDEzLTI1LjA0IDE` +
+    `zLjE2eiIgZmlsbD0iI2ZmY2IwMCIvPjxwYXRoIGQ9Im0yOC45NCAxNDMuMTZj` +
+    `LTEwLjczLS4yNi0xOS40NS01LjE2LTI0Ljk0LTE0LjkxLTUuNjYtMTAuMTItNS` +
+    `4zLTIwLjUuODQtMzAuMzdxMjMuNTEtMzcuNzIgNDcuMjMtNzUuMzNjMi0zLjI0` +
+    `IDQtNi41NiA2LjE0LTkuN2EyOS40MSAyOS40MSAwIDAgMSA0OS40MSAzMS44Nm` +
+    `MtMTcuNTIgMjguMjktMzUuMjggNTYuNDgtNTMuMDUgODQuNjQtNS43NyA5LjEz` +
+    `LTE0LjI2IDEzLjY1LTI1LjYzIDEzLjgxeiIgZmlsbD0iI2ZmM2Q1NyIvPjxwYX` +
+    `RoIGQ9Im0yMTIuMTMgODUuODJjMTYuMTcuMDggMjkuMjYgMTIuOTMgMjkuMjMg` +
+    `MjguNjkgMCAxNi0xMy40NCAyOC45LTI5Ljc2IDI4LjdzLTI5LjE4LTEyLjkxLT` +
+    `I5LjE2LTI4Ljc0Yy4wMi0xNi4wNiAxMy4xNi0yOC43NSAyOS42OS0yOC42NXoi` +
+    `IGZpbGw9IiMwMGQ2NDciLz48L3N2Zz4`,
+  logo_file_name: 'monday.svg',
   logo_mime_type: 'image/svg+xml',
   rest: {
     data: 'json',
-    oauth2_auth_args: {
-      access_type: 'offline',
-      prompt: 'consent',
-    },
-    oauth2_auth_url: 'https://example.com/oauth2/auth',
-    oauth2_client_id: 'x',
-    oauth2_client_secret: 'y',
+    url: 'https://api.monday.com',
     oauth2_grant_type: 'authorization_code',
-    oauth2_token_url: 'https://example.com/token',
-    url: 'tsrest-qorus-js-test://www.example.com/api',
+    oauth2_auth_url: 'https://auth.monday.com/oauth2/authorize',
+    oauth2_token_url: 'https://auth.monday.com/oauth2/token',
+    ping_method: 'GET',
+    ping_path: '',
+    oauth2_scopes: [
+      'me:read',
+      'boards:read',
+      'boards:write',
+      'docs:read',
+      'docs:write',
+      'workspaces:read',
+      'workspaces:write',
+      'users:read',
+      'users:write',
+      'account:read',
+      'notifications:write',
+      'updates:read',
+      'updates:write',
+      'assets:read',
+      'tags:read',
+      'teams:read',
+      'webhooks:write',
+      'webhooks:read',
+    ],
   },
-  actions: [CustomAction, CustomEventFunctionTrigger, CustomWebhookTrigger],
 });
 
-export default CustomApp;
+export default MondayApp;
