@@ -98,15 +98,14 @@ export const CreateRecord = QoreAppCreator.createAction<
 
   api_function: (data, _opts, context) => {
     const token = context?.conn_opts?.token;
-    const url = context?.conn_opts?.url;
     const boardId = data?.board_id;
     const groupId = data?.group_id;
     const itemName = data?.item_name;
     const columnValues = data?.column_values;
 
-    if (!boardId || !groupId || !itemName || !token || !url) {
+    if (!boardId || !groupId || !itemName || !token) {
       throw new Error(
-        'board_id, group_id, item_name, token, and api url are required to create a Monday app record.'
+        'board_id, group_id, item_name, token are required to create a Monday app record.'
       );
     }
 
@@ -119,7 +118,6 @@ export const CreateRecord = QoreAppCreator.createAction<
   `;
 
     return callMondayAPI({
-      url,
       query,
       variables: { boardId, groupId, itemName, columnValues: JSON.stringify(columnValues) },
       token,

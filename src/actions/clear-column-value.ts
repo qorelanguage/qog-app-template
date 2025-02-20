@@ -80,12 +80,11 @@ export const ClearColumnValue = QoreAppCreator.createAction({
     const recordId = data?.record_id;
     const columnId = data?.column_id;
     const boardId = data?.board_id;
-    const url = context?.conn_opts?.url;
     const token = context?.conn_opts?.token;
 
-    if (!recordId || !columnId || !token || !url || !boardId) {
+    if (!recordId || !columnId || !token || !boardId) {
       throw new Error(
-        'All record_id, column_id, board_id, token,api url are required to clear a Monday app column value.'
+        'All record_id, column_id, board_id, token, are required to clear a Monday app column value.'
       );
     }
 
@@ -101,7 +100,6 @@ export const ClearColumnValue = QoreAppCreator.createAction({
       query,
       variables: { recordId, columnId, boardId },
       token,
-      url,
     });
   },
   options,

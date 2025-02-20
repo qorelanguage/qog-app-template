@@ -85,11 +85,10 @@ export const GetRecord = QoreAppCreator.createAction({
 
   api_function: async (data, _opts, context) => {
     const token = context?.conn_opts?.token;
-    const url = context?.conn_opts?.url;
     const recordId = data?.record_id;
 
-    if (!recordId || !token || !url) {
-      throw new Error('record_id, token and api url are required to get a Monday app record.');
+    if (!recordId || !token) {
+      throw new Error('record_id, token are required to get a Monday app record.');
     }
 
     const query = `
@@ -109,7 +108,6 @@ export const GetRecord = QoreAppCreator.createAction({
     const result = await callMondayAPI<TGetRecordResponseType>({
       query,
       token,
-      url,
       variables: { recordId },
     });
 

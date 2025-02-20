@@ -38,13 +38,12 @@ const mondayNewRecordMovedToGroupTrigger = QoreAppCreator.createTrigger({
   options,
   webhook_register: (context, url) => {
     const token = context.conn_opts?.token;
-    const apiUrl = context.conn_opts?.url;
     const boardId = context.opts?.board_id;
     const groupId = context.opts?.group_id;
 
-    if (!token || !boardId || !groupId || !apiUrl) {
+    if (!token || !boardId || !groupId) {
       throw new Error(
-        'The token, board_id, group_id and url are required to start the Monday new_record_moved_to_group trigger'
+        'The token, board_id, group_id are required to start the Monday new_record_moved_to_group trigger'
       );
     }
 
@@ -57,7 +56,6 @@ const mondayNewRecordMovedToGroupTrigger = QoreAppCreator.createTrigger({
     return registerMondayWebhook({
       event: 'item_moved_to_specific_group',
       token,
-      apiUrl,
       variables,
     });
   },

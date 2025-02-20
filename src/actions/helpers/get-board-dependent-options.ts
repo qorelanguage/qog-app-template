@@ -47,11 +47,10 @@ export const getMondayBoardDependentOptions: TQoreGetDependentOptionsFunction = 
   context
 ): Promise<Record<string, TQoreAppActionOption>> => {
   const token = context?.conn_opts?.token;
-  const url = context?.conn_opts?.url;
   const board_id = context?.opts?.board_id;
 
-  if (!token || !url) {
-    throw new Error('Both token and API url are required to get Monday record fields');
+  if (!token) {
+    throw new Error('token is required to get Monday record fields');
   }
 
   const query = `
@@ -69,7 +68,6 @@ export const getMondayBoardDependentOptions: TQoreGetDependentOptionsFunction = 
   const response = await callMondayAPI<TBoardColumnsResponseType>({
     query,
     token,
-    url,
     variables: {
       boardId: board_id,
     },

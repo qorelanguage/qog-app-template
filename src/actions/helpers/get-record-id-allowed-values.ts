@@ -37,11 +37,10 @@ export const getMondayRecordIdAllowedValues: TQoreGetAllowedValuesFunction<
   string
 > = async (context): Promise<IQoreAllowedValue<string>[]> => {
   const token = context?.conn_opts?.token;
-  const url = context?.conn_opts?.url;
   const board_id = context?.opts?.board_id;
 
-  if (!token || !url) {
-    throw new Error('Both token and api url are required to get Monday record ID allowed values');
+  if (!token) {
+    throw new Error('token is required to get Monday record ID allowed values');
   }
 
   const query = `
@@ -68,7 +67,6 @@ export const getMondayRecordIdAllowedValues: TQoreGetAllowedValuesFunction<
   const response = await callMondayAPI<TRecordsResponseType>({
     query,
     token,
-    url,
     variables: {
       boardId: board_id,
     },

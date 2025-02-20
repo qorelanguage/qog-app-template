@@ -41,14 +41,11 @@ export const CustomAction = QoreAppCreator.createAction({
 
   api_function: async (data, _opts, context) => {
     const token = context?.conn_opts?.token;
-    const url = context?.conn_opts?.url;
     const payload = data?.payload;
     const actionName = data?.actionName;
 
-    if (!token || !url || !actionName) {
-      throw new Error(
-        'Token, action name and api url are required to create a record in a Monday app'
-      );
+    if (!token || !actionName) {
+      throw new Error('Token, action name and are required to create a record in a Monday app');
     }
 
     const query = `
@@ -61,7 +58,6 @@ export const CustomAction = QoreAppCreator.createAction({
 
     return await callMondayAPI({
       token,
-      url,
       query,
       variables: { actionName, payload },
     });

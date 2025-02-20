@@ -80,13 +80,12 @@ export const MoveRecord = QoreAppCreator.createAction({
 
   api_function: (data, _opts, context) => {
     const token = context?.conn_opts?.token;
-    const url = context?.conn_opts?.url;
     const recordId = data?.record_id;
     const groupId = data?.destination_group_id;
 
-    if (!recordId || !token || !url || !groupId) {
+    if (!recordId || !token || !groupId) {
       throw new Error(
-        'record_id, destination_group_id, token and api url are required to move a Monday app record.'
+        'record_id, destination_group_id, token are required to move a Monday app record.'
       );
     }
 
@@ -102,7 +101,6 @@ export const MoveRecord = QoreAppCreator.createAction({
       query,
       variables: { recordId, destinationGroupId: groupId },
       token,
-      url,
     });
   },
   options,

@@ -7,13 +7,12 @@ type TCallMondayApiOptions = {
   query: string;
   variables?: TMondayApiDynamicOptions;
   token: string;
-  url: string;
 };
 
 export const callMondayAPI = async <ResponseType = unknown>(
   options: TCallMondayApiOptions
 ): Promise<ResponseType> => {
-  const { query, token, url } = options;
+  const { query, token } = options;
 
   const response = await QorusRequest.post<{ data: ResponseType }>(
     {
@@ -27,7 +26,7 @@ export const callMondayAPI = async <ResponseType = unknown>(
       },
     },
     {
-      url,
+      url: 'https://api.monday.com',
       endpointId: MONDAY_APP_NAME,
     }
   );

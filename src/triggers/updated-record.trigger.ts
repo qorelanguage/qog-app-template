@@ -28,18 +28,16 @@ const mondayUpdatedRecordTrigger = QoreAppCreator.createTrigger({
   event_function: async (context, update, should_stop) => {
     const boardId = context.opts?.board_id;
     const token = context.conn_opts?.token;
-    const url = context.conn_opts?.url;
 
-    if (!token || !boardId || !url) {
+    if (!token || !boardId) {
       throw new Error(
-        'The token, board_id and url are required to start the Monday updated_record trigger'
+        'The token, board_id are required to start the Monday updated_record trigger'
       );
     }
 
     const getRecords = () => {
       return getMondayBoardItems({
         token,
-        url,
         boardId,
         limit: DEFAULT_TRIGGER_POLL_ITEM_LIMIT,
         orderBy: 'updated_at',

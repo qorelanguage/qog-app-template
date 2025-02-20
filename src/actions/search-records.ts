@@ -113,16 +113,15 @@ export const SearchRecords = QoreAppCreator.createAction({
 
   api_function: async (data, _opts, context) => {
     const token = context?.conn_opts?.token;
-    const url = context?.conn_opts?.url;
     const boardId = data?.board_id;
     const queryText = data?.query_text;
     const limit = data?.limit || 10;
     const cursor = data?.cursor;
     const columnId = data?.columnId || 'name';
 
-    if (!boardId || !token || !url || !queryText) {
+    if (!boardId || !token || !queryText) {
       throw new Error(
-        'board_id, search_query token and api url are required to search for Monday app records.'
+        'board_id, search_query token are required to search for Monday app records.'
       );
     }
 
@@ -144,7 +143,6 @@ export const SearchRecords = QoreAppCreator.createAction({
   `;
 
     const results = await callMondayAPI<TSearchRecordsResponse>({
-      url,
       query,
       variables: {
         boardId,

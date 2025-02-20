@@ -38,13 +38,12 @@ const mondayRecordColumnValueUpdatedTrigger = QoreAppCreator.createTrigger({
   options,
   webhook_register: (context, url) => {
     const token = context.conn_opts?.token;
-    const apiUrl = context.conn_opts?.url;
     const boardId = context.opts?.board_id;
     const columnId = context.opts?.column_id;
 
-    if (!token || !boardId || !columnId || !apiUrl) {
+    if (!token || !boardId || !columnId) {
       throw new Error(
-        'The token, board_id, column_id and url are required to start the Monday record_column_value_updated trigger'
+        'The token, board_id, column_id are required to start the Monday record_column_value_updated trigger'
       );
     }
 
@@ -57,7 +56,6 @@ const mondayRecordColumnValueUpdatedTrigger = QoreAppCreator.createTrigger({
     return registerMondayWebhook({
       event: 'change_specific_column_value',
       token,
-      apiUrl,
       variables,
     });
   },

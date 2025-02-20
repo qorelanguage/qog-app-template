@@ -23,7 +23,6 @@ type TQoreMondayGetBoardItemsOptions = {
   boardId: string;
   limit?: number;
   token: string;
-  url: string;
   orderBy: 'created_at' | 'updated_at';
   orderDirection: 'asc' | 'desc';
 };
@@ -31,10 +30,9 @@ type TQoreMondayGetBoardItemsOptions = {
 type TRegisterMondayWebhookOptions<
   TVariables = {
     [key: string]: any;
-  },
+  }
 > = {
   token: string;
-  apiUrl: string;
   event: string;
   variables: TVariables;
 };
@@ -42,11 +40,11 @@ type TRegisterMondayWebhookOptions<
 export const registerMondayWebhook = async <
   TVariables = {
     [key: string]: any;
-  },
+  }
 >(
   options: TRegisterMondayWebhookOptions<TVariables>
 ): Promise<{ webhook: { id: string } }> => {
-  const { token, apiUrl, variables, event } = options;
+  const { token, variables, event } = options;
 
   const query = `
     mutation CreateWebhook($boardId: ID!, $url: String!, $config: JSON!) {
@@ -68,7 +66,6 @@ export const registerMondayWebhook = async <
       token,
       query,
       variables: variables as TMondayApiDynamicOptions,
-      url: apiUrl,
     });
 
     const webhookId = result?.data?.create_webhook?.id;
@@ -93,10 +90,9 @@ export const deregisterMondayWebhook: TWebhookDeregisterFunction = async (
   regInfo
 ) => {
   const token = context.conn_opts?.token;
-  const url = context.conn_opts?.url;
   const webhookId = regInfo?.webhook.id;
 
-  if (!token || !webhookId || !url) {
+  if (!token || !webhookId) {
     throw new Error(`The token and webhook id are required to deregister the monday webhook`);
   }
 
@@ -112,7 +108,6 @@ export const deregisterMondayWebhook: TWebhookDeregisterFunction = async (
     await callMondayAPI({
       token,
       query,
-      url,
       variables: { webhookId },
     });
   } catch (error) {
@@ -121,7 +116,7 @@ export const deregisterMondayWebhook: TWebhookDeregisterFunction = async (
 };
 
 export const getMondayBoardItems = async (options: TQoreMondayGetBoardItemsOptions) => {
-  const { boardId, token, url } = options;
+  const { boardId, token } = options;
 
   const query = `
       query GetAllBoard($boardId: [ID!]!){
@@ -129,7 +124,9 @@ export const getMondayBoardItems = async (options: TQoreMondayGetBoardItemsOptio
         items_page(query_params: {
           order_by: [
             { 
-                column_id: ${options.orderBy === 'created_at' ? '__creation_log__' : '__last_updated__'}, 
+                column_id: ${
+                  options.orderBy === 'created_at' ? '__creation_log__' : '__last_updated__'
+                }, 
                 direction: ${options.orderDirection} 
             }
           ]
@@ -149,7 +146,6 @@ export const getMondayBoardItems = async (options: TQoreMondayGetBoardItemsOptio
     token,
     query,
     variables: { boardId },
-    url,
   });
 
   const items = result?.data?.boards?.[0]?.items_page?.items;

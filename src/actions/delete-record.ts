@@ -71,10 +71,9 @@ export const DeleteRecord = QoreAppCreator.createAction({
   api_function: (data, _opts, context) => {
     const recordId = data?.record_id;
     const token = context?.conn_opts?.token;
-    const url = context?.conn_opts?.url;
 
-    if (!recordId || !token || !url) {
-      throw new Error('record_id, token and api url are required to delete a Monday app record.');
+    if (!recordId || !token) {
+      throw new Error('record_id, token are required to delete a Monday app record.');
     }
 
     const query = `
@@ -85,7 +84,7 @@ export const DeleteRecord = QoreAppCreator.createAction({
     }
   `;
 
-    return callMondayAPI({ query, variables: { recordId }, token, url });
+    return callMondayAPI({ query, variables: { recordId }, token });
   },
   options,
   response_type,

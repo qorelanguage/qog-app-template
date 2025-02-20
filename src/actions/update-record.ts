@@ -85,14 +85,13 @@ export const UpdateRecord = QoreAppCreator.createAction<
 
   api_function: (data, _opts, context) => {
     const token = context?.conn_opts?.token;
-    const url = context?.conn_opts?.url;
     const recordId = data?.record_id;
     const columnValues = data?.column_values;
     const boardId = data?.board_id;
 
-    if (!recordId || !token || !url || !columnValues || !boardId) {
+    if (!recordId || !token || !columnValues || !boardId) {
       throw new Error(
-        'board_id, column_values, record_id, token and api url are required to update a Monday app record.'
+        'board_id, column_values, record_id, token are required to update a Monday app record.'
       );
     }
 
@@ -109,7 +108,6 @@ export const UpdateRecord = QoreAppCreator.createAction<
   `;
 
     return callMondayAPI({
-      url,
       query,
       variables: { recordId, columnValues: JSON.stringify(columnValues), boardId },
       token,

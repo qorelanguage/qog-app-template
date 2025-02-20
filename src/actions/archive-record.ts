@@ -69,13 +69,10 @@ export const ArchiveRecord = QoreAppCreator.createAction({
 
   api_function: (data, _opts, context) => {
     const recordId = data?.record_id;
-    const url = context?.conn_opts?.url;
     const token = context?.conn_opts?.token;
 
-    if (!recordId || !token || !url) {
-      throw new Error(
-        'Both record_id, token and api url are required to archive a Monday app record.'
-      );
+    if (!recordId || !token) {
+      throw new Error('Both record_id and token are required to archive a Monday app record.');
     }
 
     const query = `
@@ -90,7 +87,6 @@ export const ArchiveRecord = QoreAppCreator.createAction({
       query,
       variables: { recordId },
       token,
-      url,
     });
   },
   options: ArchiveRecordOptions,
