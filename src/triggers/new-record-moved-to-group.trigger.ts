@@ -60,6 +60,7 @@ const mondayNewRecordMovedToGroupTrigger = QoreAppCreator.createTrigger({
     });
   },
   webhook_method: 'POST',
+  webhook_echo_body_keys: ['challenge'],
   webhook_deregister: deregisterMondayWebhook,
   event_info: {
     desc: 'Record Data',
