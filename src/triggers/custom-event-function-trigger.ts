@@ -15,7 +15,7 @@ const CustomEventFunctionTriggerOptions = {
   },
 } satisfies TQoreOptions;
 
-const CustomEventFuntionTriggerInfo = {
+const CustomEventFunctionTriggerInfo = {
   desc: 'This is a custom event function trigger returned data description',
   type: {
     type: 'hash',
@@ -58,5 +58,5 @@ export const CustomEventFunctionTrigger = QoreAppCreator.createTrigger({
     };
   },
   options: CustomEventFunctionTriggerOptions,
-  event_info: CustomEventFuntionTriggerInfo,
+  event_info: CustomEventFunctionTriggerInfo,
 });

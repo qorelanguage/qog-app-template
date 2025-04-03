@@ -1,5 +1,5 @@
 import { QoreAppCreator } from '@qoretechnologies/ts-toolkit';
-import { CustomAction } from './actions/custom-aciton';
+import { CustomAction } from './actions/custom-action';
 import { CustomEventFunctionTrigger } from './triggers/custom-event-function-trigger';
 import { CustomWebhookTrigger } from './triggers/custom-webhook-trigger';
 
