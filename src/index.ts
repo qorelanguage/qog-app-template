@@ -1,0 +1,46 @@
+import { QoreAppCreator } from '@qoretechnologies/ts-toolkit';
+import { CustomAction } from './actions/custom-action';
+import { CustomEventFunctionTrigger } from './triggers/custom-event-function-trigger';
+import { CustomWebhookTrigger } from './triggers/custom-webhook-trigger';
+
+const CustomApp = QoreAppCreator.createApp({
+  name: 'Custom-app',
+  display_name: 'Custom Test App',
+  desc: 'This is a custom testing app',
+  short_desc: 'Custom testing app',
+
+  logo:
+    'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUF' +
+    'VCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2' +
+    'ZzExLmR0ZCI+Cjxzdmcgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDYzIDYzIiB2ZXJzaW9uPSIxLj' +
+    'EiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkv' +
+    'eGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zOnNlcmlmPSJodHRwOi8vd3d3LnNlcmlmLmNvbS8iIHN0eWxlPSJmaW' +
+    'xsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6' +
+    'MjsiPgogICAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsMSwtMTAuNzUxOCwtMjIuNzE5KSI+CiAgICAgICAgPHBhdGggZD' +
+    '0iTTY4LjM2Myw2My45NzNMNjguMzYzLDQwLjEwOUM2OC4zNjMsNDAuMTA5IDY4LjM2MywzNy4xMTMgNjUuNzY4LDM1LjYxNUw0' +
+    'NS4xMDIsMjMuNjgzQzQ1LjEwMiwyMy42ODMgNDIuNTA3LDIyLjE4NSAzOS45MTIsMjMuNjgzTDE5LjI0NSwzNS42MTVDMTkuMj' +
+    'Q1LDM1LjYxNSAxNi42NSwzNy4xMTMgMTYuNjUsNDAuMTA5TDE2LjY1LDYzLjk3M0MxNi42NSw2My45NzMgMTYuNjUsNjYuOTY5' +
+    'IDE5LjI0NSw2OC40NjdMNDcuODM5LDg0LjgyMkM0Ny44MzksODQuODIyIDUwLjQzNCw4Ni4zNjggNTMuMDI5LDg0Ljg3TDY0Lj' +
+    'Y1Miw3OC4xMTJMNDIuNTIsNjUuNTAzTDQyLjUwNyw2NS41MTFMMzAuODQzLDU4Ljc3NkwzMC44NDMsNDUuMzA3TDQyLjUwNywz' +
+    'OC41NzNMNTQuMTcxLDQ1LjMwN0w1NC4xNzEsNTguNzc2TDQ1LjIxMyw2My45NDhMNTkuNTY1LDcyLjA1TDY1Ljc2OCw2OC40Nj' +
+    'lDNjUuNzY5LDY4LjQ2OCA2OC4zNjMsNjYuOTcgNjguMzYzLDYzLjk3MyIgc3R5bGU9ImZpbGw6cmdiKDAsMjMxLDI1NSk7Zmls' +
+    'bC1ydWxlOm5vbnplcm87Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=',
+  logo_file_name: 'test.svg',
+  logo_mime_type: 'image/svg+xml',
+  rest: {
+    data: 'json',
+    oauth2_auth_args: {
+      access_type: 'offline',
+      prompt: 'consent',
+    },
+    oauth2_auth_url: 'https://example.com/oauth2/auth',
+    oauth2_client_id: 'x',
+    oauth2_client_secret: 'y',
+    oauth2_grant_type: 'authorization_code',
+    oauth2_token_url: 'https://example.com/token',
+    url: 'tsrest-qorus-js-test://www.example.com/api',
+  },
+  actions: [CustomAction, CustomEventFunctionTrigger, CustomWebhookTrigger],
+});
+
+export default CustomApp;
