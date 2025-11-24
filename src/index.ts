@@ -1,46 +1,90 @@
-import { QoreAppCreator } from '@qoretechnologies/ts-toolkit';
-import { CustomAction } from './actions/custom-action';
-import { CustomEventFunctionTrigger } from './triggers/custom-event-function-trigger';
-import { CustomWebhookTrigger } from './triggers/custom-webhook-trigger';
+import { QoreAppCreator, QorusRequest } from '@qoretechnologies/ts-toolkit';
+import {
+  OPENHUE_APP_LOGO,
+  OPENHUE_APP_NAME,
+  OPENHUE_CONN_OPTIONS,
+  OPENHUE_ENDPOINT_CONFIG,
+  OpenHueError,
+} from './constants';
+import { getQoreContextRequiredValues } from './helpers/constants';
+
+import * as actions from './actions';
+
+const hueActions = Object.values(actions);
 
 const CustomApp = QoreAppCreator.createApp({
-  name: 'Custom-app',
-  display_name: 'Custom Test App',
-  desc: 'This is a custom testing app',
-  short_desc: 'Custom testing app',
-
-  logo:
-    'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUF' +
-    'VCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2' +
-    'ZzExLmR0ZCI+Cjxzdmcgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDYzIDYzIiB2ZXJzaW9uPSIxLj' +
-    'EiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkv' +
-    'eGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zOnNlcmlmPSJodHRwOi8vd3d3LnNlcmlmLmNvbS8iIHN0eWxlPSJmaW' +
-    'xsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6' +
-    'MjsiPgogICAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsMSwtMTAuNzUxOCwtMjIuNzE5KSI+CiAgICAgICAgPHBhdGggZD' +
-    '0iTTY4LjM2Myw2My45NzNMNjguMzYzLDQwLjEwOUM2OC4zNjMsNDAuMTA5IDY4LjM2MywzNy4xMTMgNjUuNzY4LDM1LjYxNUw0' +
-    'NS4xMDIsMjMuNjgzQzQ1LjEwMiwyMy42ODMgNDIuNTA3LDIyLjE4NSAzOS45MTIsMjMuNjgzTDE5LjI0NSwzNS42MTVDMTkuMj' +
-    'Q1LDM1LjYxNSAxNi42NSwzNy4xMTMgMTYuNjUsNDAuMTA5TDE2LjY1LDYzLjk3M0MxNi42NSw2My45NzMgMTYuNjUsNjYuOTY5' +
-    'IDE5LjI0NSw2OC40NjdMNDcuODM5LDg0LjgyMkM0Ny44MzksODQuODIyIDUwLjQzNCw4Ni4zNjggNTMuMDI5LDg0Ljg3TDY0Lj' +
-    'Y1Miw3OC4xMTJMNDIuNTIsNjUuNTAzTDQyLjUwNyw2NS41MTFMMzAuODQzLDU4Ljc3NkwzMC44NDMsNDUuMzA3TDQyLjUwNywz' +
-    'OC41NzNMNTQuMTcxLDQ1LjMwN0w1NC4xNzEsNTguNzc2TDQ1LjIxMyw2My45NDhMNTkuNTY1LDcyLjA1TDY1Ljc2OCw2OC40Nj' +
-    'lDNjUuNzY5LDY4LjQ2OCA2OC4zNjMsNjYuOTcgNjguMzYzLDYzLjk3MyIgc3R5bGU9ImZpbGw6cmdiKDAsMjMxLDI1NSk7Zmls' +
-    'bC1ydWxlOm5vbnplcm87Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=',
-  logo_file_name: 'test.svg',
+  name: OPENHUE_APP_NAME,
+  logo: OPENHUE_APP_LOGO,
+  logo_file_name: 'openhue.svg',
   logo_mime_type: 'image/svg+xml',
+  display_name: 'Philips Hue',
+  desc: 'Philips Hue',
+  short_desc: 'Philips Hue',
   rest: {
     data: 'json',
-    oauth2_auth_args: {
-      access_type: 'offline',
-      prompt: 'consent',
-    },
-    oauth2_auth_url: 'https://example.com/oauth2/auth',
-    oauth2_client_id: 'x',
-    oauth2_client_secret: 'y',
+    oauth2_token_use_basic_auth: true,
+    oauth2_redirect_url: 'cloud',
+    oauth2_auth_url: 'https://api.meethue.com/v2/oauth2/authorize',
+    oauth2_client_id: '38cdde9c-0bfd-4743-bea2-ed92468ea4e2',
+    oauth2_client_secret: '7f63df0a503e8f9b2999481c5b22ce71',
     oauth2_grant_type: 'authorization_code',
-    oauth2_token_url: 'https://example.com/token',
-    url: 'tsrest-qorus-js-test://www.example.com/api',
+    oauth2_token_url: 'https://api.meethue.com/v2/oauth2/token',
+    url: 'https://api.meethue.com',
+    ping_path: '/route/clip/v2/resource/device',
+    ping_headers: {
+      username: '{{username}}',
+    },
   },
-  actions: [CustomAction, CustomEventFunctionTrigger, CustomWebhookTrigger],
+  rest_modifiers: {
+    options: OPENHUE_CONN_OPTIONS,
+    url_template_options: ['username'],
+    set_options_post_auth: async (context) => {
+      const token = getQoreContextRequiredValues({
+        context,
+        connectionFields: ['token'],
+        ErrorClass: OpenHueError,
+      });
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      await QorusRequest.put(
+        {
+          path: '/route/api/0/config',
+          headers,
+          data: {
+            linkbutton: true,
+          },
+        },
+        OPENHUE_ENDPOINT_CONFIG
+      );
+
+      const usernameResponse = await QorusRequest.post<{
+        data: {
+          success: {
+            username: string;
+          };
+        };
+      }>(
+        {
+          path: '/route/api',
+          headers,
+          data: {
+            devicetype: 'qorushue',
+          },
+        },
+        OPENHUE_ENDPOINT_CONFIG
+      );
+
+      const username = usernameResponse?.data.success.username;
+
+      return {
+        username,
+      };
+    },
+  },
+  actions: hueActions,
 });
 
 export default CustomApp;
