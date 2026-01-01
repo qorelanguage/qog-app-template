@@ -16,7 +16,7 @@ const options = {
 
 const GetLight = QoreAppCreator.createAction({
   action: 'get_light',
-  group: 'Lights',
+  groups: ['Lights'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Get Light',
@@ -83,7 +83,7 @@ const GetLight = QoreAppCreator.createAction({
         type: {
           type: 'hash',
           fields: {
-            on: { type: 'boolean' },
+            on: { type: 'bool' },
           },
         },
       },
@@ -106,7 +106,7 @@ const GetLight = QoreAppCreator.createAction({
           type: 'hash',
           fields: {
             mirek: { type: 'integer' },
-            mirek_valid: { type: 'boolean' },
+            mirek_valid: { type: 'bool' },
             mirek_schema: {
               type: {
                 type: 'hash',
@@ -136,7 +136,7 @@ const GetLight = QoreAppCreator.createAction({
               },
             },
             speed: { type: 'number' },
-            speed_valid: { type: 'boolean' },
+            speed_valid: { type: 'bool' },
           },
         },
       },
@@ -226,7 +226,7 @@ const GetLight = QoreAppCreator.createAction({
           type: 'hash',
           fields: {
             preset: { type: 'string' },
-            configured: { type: 'boolean' },
+            configured: { type: 'bool' },
             on: {
               type: {
                 type: 'hash',

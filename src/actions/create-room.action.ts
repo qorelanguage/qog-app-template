@@ -76,7 +76,7 @@ const options = {
 
 const CreateRoom = QoreAppCreator.createAction({
   action: 'create_room',
-  group: 'Rooms',
+  groups: ['Rooms'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Create Room',
@@ -119,7 +119,7 @@ const CreateRoom = QoreAppCreator.createAction({
   response_type: {
     type: 'hash',
     fields: {
-      success: { type: 'boolean' },
+      success: { type: 'bool' },
       created_resources: {
         type: {
           type: 'list',

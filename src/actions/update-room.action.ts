@@ -85,7 +85,7 @@ const options = {
 
 const UpdateRoom = QoreAppCreator.createAction({
   action: 'update_room',
-  group: 'Rooms',
+  groups: ['Rooms'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Update Room',
@@ -135,7 +135,7 @@ const UpdateRoom = QoreAppCreator.createAction({
   response_type: {
     type: 'hash',
     fields: {
-      success: { type: 'boolean' },
+      success: { type: 'bool' },
       updated_resources: {
         type: {
           type: 'list',

@@ -6,7 +6,7 @@ const options = {} satisfies TQoreOptions;
 
 const ListLights = QoreAppCreator.createAction({
   action: 'list_lights',
-  group: 'Lights',
+  groups: ['Lights'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'List Lights',
@@ -84,7 +84,7 @@ const ListLights = QoreAppCreator.createAction({
                 type: {
                   type: 'hash',
                   fields: {
-                    on: { type: 'boolean' },
+                    on: { type: 'bool' },
                   },
                 },
               },
@@ -111,7 +111,7 @@ const ListLights = QoreAppCreator.createAction({
                   type: 'hash',
                   fields: {
                     mirek: { type: 'integer' },
-                    mirek_valid: { type: 'boolean' },
+                    mirek_valid: { type: 'bool' },
                     mirek_schema: {
                       type: {
                         type: 'hash',
@@ -196,7 +196,7 @@ const ListLights = QoreAppCreator.createAction({
                       },
                     },
                     speed: { type: 'number' },
-                    speed_valid: { type: 'boolean' },
+                    speed_valid: { type: 'bool' },
                   },
                 },
               },
@@ -370,7 +370,7 @@ const ListLights = QoreAppCreator.createAction({
                                     type: 'hash',
                                     fields: {
                                       mirek: { type: 'integer' },
-                                      mirek_valid: { type: 'boolean' },
+                                      mirek_valid: { type: 'bool' },
                                     },
                                   },
                                 },
@@ -409,7 +409,7 @@ const ListLights = QoreAppCreator.createAction({
                   type: 'hash',
                   fields: {
                     preset: { type: 'string' },
-                    configured: { type: 'boolean' },
+                    configured: { type: 'bool' },
                     on: {
                       type: {
                         type: 'hash',
@@ -419,7 +419,7 @@ const ListLights = QoreAppCreator.createAction({
                             type: {
                               type: 'hash',
                               fields: {
-                                on: { type: 'boolean' },
+                                on: { type: 'bool' },
                               },
                             },
                           },
@@ -486,7 +486,7 @@ const ListLights = QoreAppCreator.createAction({
                         type: 'hash',
                         fields: {
                           status: { type: 'string' },
-                          configurable: { type: 'boolean' },
+                          configurable: { type: 'bool' },
                           orientation: { type: 'string' },
                         },
                       },
@@ -496,7 +496,7 @@ const ListLights = QoreAppCreator.createAction({
                         type: 'hash',
                         fields: {
                           status: { type: 'string' },
-                          configurable: { type: 'boolean' },
+                          configurable: { type: 'bool' },
                           order: { type: 'string' },
                         },
                       },

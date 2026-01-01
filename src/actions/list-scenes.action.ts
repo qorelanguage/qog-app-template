@@ -6,7 +6,7 @@ const options = {} satisfies TQoreOptions;
 
 const ListScenes = QoreAppCreator.createAction({
   action: 'list_scenes',
-  group: 'Scenes',
+  groups: ['Scenes'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'List Scenes',
@@ -66,7 +66,7 @@ const ListScenes = QoreAppCreator.createAction({
                 },
               },
               speed: { type: 'number' },
-              auto_dynamic: { type: 'boolean' },
+              auto_dynamic: { type: 'bool' },
               status: {
                 type: {
                   type: 'hash',

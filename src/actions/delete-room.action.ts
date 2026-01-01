@@ -16,7 +16,7 @@ const options = {
 
 const DeleteRoom = QoreAppCreator.createAction({
   action: 'delete_room',
-  group: 'Rooms',
+  groups: ['Rooms'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Delete Room',
@@ -46,7 +46,7 @@ const DeleteRoom = QoreAppCreator.createAction({
   response_type: {
     type: 'hash',
     fields: {
-      success: { type: 'boolean' },
+      success: { type: 'bool' },
       deleted_resources: {
         type: {
           type: 'list',

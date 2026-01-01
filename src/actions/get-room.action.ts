@@ -16,7 +16,7 @@ const options = {
 
 const GetRoom = QoreAppCreator.createAction({
   action: 'get_room',
-  group: 'Rooms',
+  groups: ['Rooms'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Get Room',

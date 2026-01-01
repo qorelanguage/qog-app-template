@@ -38,7 +38,7 @@ const options = {
             get_allowed_values: getOpenHueLightAllowedValues,
           },
           on: {
-            type: 'boolean',
+            type: 'bool',
             required: false,
             display_name: 'Power State',
             short_desc: 'Turn light on or off',
@@ -88,14 +88,14 @@ const options = {
     display_name: 'Auto Dynamic',
     short_desc: 'Start dynamically on recall',
     desc: 'Whether to automatically start the scene dynamically when recalled',
-    type: 'boolean',
+    type: 'bool',
     required: false,
   },
 } satisfies TQoreOptions;
 
 const CreateScene = QoreAppCreator.createAction({
   action: 'create_scene',
-  group: 'Scenes',
+  groups: ['Scenes'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Create Scene',
@@ -177,7 +177,7 @@ const CreateScene = QoreAppCreator.createAction({
   response_type: {
     type: 'hash',
     fields: {
-      success: { type: 'boolean' },
+      success: { type: 'bool' },
       created_resources: {
         type: {
           type: 'list',

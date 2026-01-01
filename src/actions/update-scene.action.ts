@@ -30,14 +30,14 @@ const options = {
     display_name: 'Auto Dynamic',
     short_desc: 'Start dynamically on recall',
     desc: 'Whether to automatically start dynamically when recalled',
-    type: 'boolean',
+    type: 'bool',
     required: false,
   },
 } satisfies TQoreOptions;
 
 const UpdateScene = QoreAppCreator.createAction({
   action: 'update_scene',
-  group: 'Scenes',
+  groups: ['Scenes'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Update Scene',
@@ -82,7 +82,7 @@ const UpdateScene = QoreAppCreator.createAction({
   response_type: {
     type: 'hash',
     fields: {
-      success: { type: 'boolean' },
+      success: { type: 'bool' },
       updated_resources: {
         type: {
           type: 'list',

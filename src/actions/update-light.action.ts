@@ -16,7 +16,7 @@ const options = {
     display_name: 'Power State',
     short_desc: 'Turn the light on or off',
     desc: 'Set whether the light should be on or off',
-    type: 'boolean',
+    type: 'bool',
     required: false,
     preselected: true,
   },
@@ -80,7 +80,7 @@ const options = {
 
 const UpdateLight = QoreAppCreator.createAction({
   action: 'update_light',
-  group: 'Lights',
+  groups: ['Lights'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Update Light',
@@ -142,7 +142,7 @@ const UpdateLight = QoreAppCreator.createAction({
   response_type: {
     type: 'hash',
     fields: {
-      success: { type: 'boolean' },
+      success: { type: 'bool' },
       updated_resources: {
         type: {
           type: 'list',

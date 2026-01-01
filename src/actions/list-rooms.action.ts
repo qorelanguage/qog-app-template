@@ -6,7 +6,7 @@ const options = {} satisfies TQoreOptions;
 
 const ListRooms = QoreAppCreator.createAction({
   action: 'list_rooms',
-  group: 'Rooms',
+  groups: ['Rooms'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'List Rooms',

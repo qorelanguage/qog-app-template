@@ -76,7 +76,7 @@ const options = {
 
 const CreateZone = QoreAppCreator.createAction({
   action: 'create_zone',
-  group: 'Zones',
+  groups: ['Zones'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Create Zone',
@@ -119,7 +119,7 @@ const CreateZone = QoreAppCreator.createAction({
   response_type: {
     type: 'hash',
     fields: {
-      success: { type: 'boolean' },
+      success: { type: 'bool' },
       created_resources: {
         type: {
           type: 'list',

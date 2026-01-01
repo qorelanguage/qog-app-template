@@ -43,7 +43,7 @@ const options = {
 
 const RecallScene = QoreAppCreator.createAction({
   action: 'recall_scene',
-  group: 'Scenes',
+  groups: ['Scenes'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Recall Scene',
@@ -90,7 +90,7 @@ const RecallScene = QoreAppCreator.createAction({
   response_type: {
     type: 'hash',
     fields: {
-      success: { type: 'boolean' },
+      success: { type: 'bool' },
       updated_resources: {
         type: {
           type: 'list',

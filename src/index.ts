@@ -25,8 +25,6 @@ const CustomApp = QoreAppCreator.createApp({
     oauth2_token_use_basic_auth: true,
     oauth2_redirect_url: 'cloud',
     oauth2_auth_url: 'https://api.meethue.com/v2/oauth2/authorize',
-    oauth2_client_id: '38cdde9c-0bfd-4743-bea2-ed92468ea4e2',
-    oauth2_client_secret: '7f63df0a503e8f9b2999481c5b22ce71',
     oauth2_grant_type: 'authorization_code',
     oauth2_token_url: 'https://api.meethue.com/v2/oauth2/token',
     url: 'https://api.meethue.com',
@@ -37,9 +35,18 @@ const CustomApp = QoreAppCreator.createApp({
   },
   rest_modifiers: {
     options: OPENHUE_CONN_OPTIONS,
+    required_options: 'is_button_pressed',
+    messages: [
+      {
+        content:
+          'Before creating the connection, please make sure you have pressed the link button on your Hue Bridge.',
+        intent: 'info',
+        title: 'Connection setup',
+      },
+    ],
     url_template_options: ['username'],
     set_options_post_auth: async (context) => {
-      const token = getQoreContextRequiredValues({
+      const { token } = getQoreContextRequiredValues({
         context,
         connectionFields: ['token'],
         ErrorClass: OpenHueError,

@@ -21,7 +21,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "@qoretechnologies/ts-toolkit": "^0.5.43",
+    "@qoretechnologies/ts-toolkit": "^0.5.67",
     "lodash": "^4.17.21"
   }
 }

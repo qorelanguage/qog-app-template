@@ -6,7 +6,7 @@ const options = {} satisfies TQoreOptions;
 
 const ListZones = QoreAppCreator.createAction({
   action: 'list_zones',
-  group: 'Zones',
+  groups: ['Zones'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'List Zones',

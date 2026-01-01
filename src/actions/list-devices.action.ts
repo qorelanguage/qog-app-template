@@ -83,7 +83,7 @@ const ListDevices = QoreAppCreator.createAction({
                 type: {
                   type: 'hash',
                   fields: {
-                    on: { type: 'boolean' },
+                    on: { type: 'bool' },
                   },
                 },
               },
@@ -110,7 +110,7 @@ const ListDevices = QoreAppCreator.createAction({
                   type: 'hash',
                   fields: {
                     mirek: { type: 'integer' },
-                    mirek_valid: { type: 'boolean' },
+                    mirek_valid: { type: 'bool' },
                     mirek_schema: {
                       type: {
                         type: 'hash',
@@ -195,7 +195,7 @@ const ListDevices = QoreAppCreator.createAction({
                       },
                     },
                     speed: { type: 'number' },
-                    speed_valid: { type: 'boolean' },
+                    speed_valid: { type: 'bool' },
                   },
                 },
               },
@@ -369,7 +369,7 @@ const ListDevices = QoreAppCreator.createAction({
                                     type: 'hash',
                                     fields: {
                                       mirek: { type: 'integer' },
-                                      mirek_valid: { type: 'boolean' },
+                                      mirek_valid: { type: 'bool' },
                                     },
                                   },
                                 },
@@ -408,7 +408,7 @@ const ListDevices = QoreAppCreator.createAction({
                   type: 'hash',
                   fields: {
                     preset: { type: 'string' },
-                    configured: { type: 'boolean' },
+                    configured: { type: 'bool' },
                     on: {
                       type: {
                         type: 'hash',
@@ -418,7 +418,7 @@ const ListDevices = QoreAppCreator.createAction({
                             type: {
                               type: 'hash',
                               fields: {
-                                on: { type: 'boolean' },
+                                on: { type: 'bool' },
                               },
                             },
                           },
@@ -485,7 +485,7 @@ const ListDevices = QoreAppCreator.createAction({
                         type: 'hash',
                         fields: {
                           status: { type: 'string' },
-                          configurable: { type: 'boolean' },
+                          configurable: { type: 'bool' },
                           orientation: { type: 'string' },
                         },
                       },
@@ -495,7 +495,7 @@ const ListDevices = QoreAppCreator.createAction({
                         type: 'hash',
                         fields: {
                           status: { type: 'string' },
-                          configurable: { type: 'boolean' },
+                          configurable: { type: 'bool' },
                           order: { type: 'string' },
                         },
                       },

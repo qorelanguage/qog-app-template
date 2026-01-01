@@ -85,7 +85,7 @@ const options = {
 
 const UpdateZone = QoreAppCreator.createAction({
   action: 'update_zone',
-  group: 'Zones',
+  groups: ['Zones'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Update Zone',
@@ -135,7 +135,7 @@ const UpdateZone = QoreAppCreator.createAction({
   response_type: {
     type: 'hash',
     fields: {
-      success: { type: 'boolean' },
+      success: { type: 'bool' },
       updated_resources: {
         type: {
           type: 'list',

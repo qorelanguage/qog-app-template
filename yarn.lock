@@ -1062,9 +1062,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@qoretechnologies/ts-toolkit@npm:^0.5.43":
-  version: 0.5.43
-  resolution: "@qoretechnologies/ts-toolkit@npm:0.5.43"
+"@qoretechnologies/ts-toolkit@npm:^0.5.67":
+  version: 0.5.67
+  resolution: "@qoretechnologies/ts-toolkit@npm:0.5.67"
   dependencies:
     "@qoretechnologies/reqraft": "npm:^0.7.0"
     async: "npm:^3.2.4"
@@ -1075,7 +1075,7 @@ __metadata:
     react-markdown: "npm:^8.0.4"
   peerDependencies:
     "@qoretechnologies/reqore": <1.0.0
-  checksum: 10c0/7351895f3eb8de3b6121f70137cd408ca5f0067c6ecd396422433c63d57814a019fe7a8acfe29e13de54b7888c97df9484810687a8ab5ca1ebf25e4099ea31be
+  checksum: 10c0/b91165167c6864798f40177fd2765c1d126da72ed6f34fc70cf7f6c3b1d9ba914da28a9f9e0c52bef859f799d79fdeac10bea165907171ad1ea1999ed397a7c9
   languageName: node
   linkType: hard
 
@@ -4766,7 +4766,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "qog-app-template@workspace:."
   dependencies:
-    "@qoretechnologies/ts-toolkit": "npm:^0.5.43"
+    "@qoretechnologies/ts-toolkit": "npm:^0.5.67"
     "@types/jest": "npm:^30.0.0"
     "@types/lodash": "npm:^4"
     "@types/node": "npm:^22.12.0"

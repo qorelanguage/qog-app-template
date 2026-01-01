@@ -16,7 +16,7 @@ const options = {
 
 const GetZone = QoreAppCreator.createAction({
   action: 'get_zone',
-  group: 'Zones',
+  groups: ['Zones'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Get Zone',

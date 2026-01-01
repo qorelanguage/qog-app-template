@@ -16,7 +16,7 @@ const options = {
 
 const DeleteZone = QoreAppCreator.createAction({
   action: 'delete_zone',
-  group: 'Zones',
+  groups: ['Zones'],
   app: OPENHUE_APP_NAME,
   action_code: EQoreAppActionCode.ACTION,
   display_name: 'Delete Zone',
@@ -46,7 +46,7 @@ const DeleteZone = QoreAppCreator.createAction({
   response_type: {
     type: 'hash',
     fields: {
-      success: { type: 'boolean' },
+      success: { type: 'bool' },
       deleted_resources: {
         type: {
           type: 'list',
