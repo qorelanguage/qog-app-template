@@ -35,13 +35,12 @@ const CustomApp = QoreAppCreator.createApp({
   },
   rest_modifiers: {
     options: OPENHUE_CONN_OPTIONS,
-    required_options: 'is_button_pressed',
     messages: [
       {
         content:
           'Before creating the connection, please make sure you have pressed the link button on your Hue Bridge.',
         intent: 'info',
-        title: 'Connection setup',
+        title: '',
       },
     ],
     url_template_options: ['username'],
