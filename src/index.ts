@@ -69,9 +69,9 @@ const CustomApp = QoreAppCreator.createApp({
       const nicknameResponse = await QorusRequest.post<{
         data: {
           success: {
-            nickname: string;
+            username: string;
           };
-        };
+        }[];
       }>(
         {
           path: '/route/api',
@@ -83,7 +83,7 @@ const CustomApp = QoreAppCreator.createApp({
         OPENHUE_ENDPOINT_CONFIG
       );
 
-      const nickname = nicknameResponse?.data.success.nickname;
+      const nickname = nicknameResponse?.data?.[0]?.success?.username;
 
       return {
         nickname,
