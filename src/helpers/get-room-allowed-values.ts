@@ -31,15 +31,15 @@ export const getOpenHueRoomAllowedValues: TQoreGetAllowedValuesFunction<
   TCustomConnOptions,
   string
 > = async (context) => {
-  const { token, username } = getQoreContextRequiredValues({
+  const { token, nickname } = getQoreContextRequiredValues({
     context,
-    connectionFields: ['token', 'username'],
+    connectionFields: ['token', 'nickname'],
     ErrorClass: OpenHueError,
   });
 
   return await fetchOpenHueAllowedValues<TOpenHueRoom>({
     token,
-    username,
+    nickname,
     path: `resource/room`,
     object: 'data',
     mapItemToAllowedValue: mapOpenHueRoomToAllowedValue,

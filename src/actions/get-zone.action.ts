@@ -24,15 +24,15 @@ const GetZone = QoreAppCreator.createAction({
   desc: 'Retrieve detailed information about a specific zone including its lights and grouped services',
   options,
   api_function: async (obj, _options, context) => {
-    const { username, token, zoneId } = getQoreContextRequiredValues({
+    const { nickname, token, zoneId } = getQoreContextRequiredValues({
       context: { ...context, opts: obj },
-      connectionFields: ['username', 'token'],
+      connectionFields: ['nickname', 'token'],
       optionFields: ['zoneId'],
       ErrorClass: OpenHueError,
     });
 
     const data = await openHueApiClient<Record<string, any>[]>({
-      username,
+      nickname,
       token,
       object: 'data',
       path: `resource/zone/${zoneId}`,

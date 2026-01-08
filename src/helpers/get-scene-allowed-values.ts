@@ -32,15 +32,15 @@ export const getOpenHueSceneAllowedValues: TQoreGetAllowedValuesFunction<
   TCustomConnOptions,
   string
 > = async (context) => {
-  const { token, username } = getQoreContextRequiredValues({
+  const { token, nickname } = getQoreContextRequiredValues({
     context,
-    connectionFields: ['token', 'username'],
+    connectionFields: ['token', 'nickname'],
     ErrorClass: OpenHueError,
   });
 
   return await fetchOpenHueAllowedValues<TOpenHueScene>({
     token,
-    username,
+    nickname,
     path: `resource/scene`,
     object: 'data',
     mapItemToAllowedValue: mapOpenHueSceneToAllowedValue,

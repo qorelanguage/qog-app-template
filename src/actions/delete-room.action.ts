@@ -24,15 +24,15 @@ const DeleteRoom = QoreAppCreator.createAction({
   desc: 'Permanently delete a room from your Philips Hue system',
   options,
   api_function: async (obj, _options, context) => {
-    const { username, token, roomId } = getQoreContextRequiredValues({
+    const { nickname, token, roomId } = getQoreContextRequiredValues({
       context: { ...context, opts: obj },
-      connectionFields: ['username', 'token'],
+      connectionFields: ['nickname', 'token'],
       optionFields: ['roomId'],
       ErrorClass: OpenHueError,
     });
 
     const data = await openHueApiClient<{ data: Array<{ rid: string; rtype: string }> }>({
-      username,
+      nickname,
       token,
       path: `resource/room/${roomId}`,
       method: 'DELETE',

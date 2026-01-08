@@ -14,14 +14,14 @@ const ListRooms = QoreAppCreator.createAction({
   desc: 'Retrieve a list of all rooms in your Philips Hue system with their devices and services',
   options,
   api_function: async (obj, _options, context) => {
-    const { username, token } = getQoreContextRequiredValues({
+    const { nickname, token } = getQoreContextRequiredValues({
       context: { ...context, opts: obj },
-      connectionFields: ['username', 'token'],
+      connectionFields: ['nickname', 'token'],
       ErrorClass: OpenHueError,
     });
 
     const data = await openHueApiClient({
-      username,
+      nickname,
       token,
       object: 'data',
       path: 'resource/room',

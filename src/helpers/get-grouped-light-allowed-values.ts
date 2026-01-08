@@ -50,14 +50,14 @@ export const getOpenHueGroupedLightAllowedValues: TQoreGetAllowedValuesFunction<
   TCustomConnOptions,
   string
 > = async (context) => {
-  const { token, username } = getQoreContextRequiredValues({
+  const { token, nickname } = getQoreContextRequiredValues({
     context,
-    connectionFields: ['token', 'username'],
+    connectionFields: ['token', 'nickname'],
     ErrorClass: OpenHueError,
   });
 
   const rooms = await openHueApiClient<TOpenHueRoom[]>({
-    username,
+    nickname,
     token,
     object: 'data',
     path: 'resource/room',
@@ -71,7 +71,7 @@ export const getOpenHueGroupedLightAllowedValues: TQoreGetAllowedValuesFunction<
 
   return await fetchOpenHueAllowedValues<TOpenHueGroupedLight>({
     token,
-    username,
+    nickname,
     path: `resource/grouped_light`,
     object: 'data',
     mapItemToAllowedValue: getMapOpenHueGroupedLightToAllowedValueFunction(roomMap),

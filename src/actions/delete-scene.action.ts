@@ -24,15 +24,15 @@ const DeleteScene = QoreAppCreator.createAction({
   desc: 'Permanently delete a scene from your Philips Hue system',
   options,
   api_function: async (obj, _options, context) => {
-    const { username, token, sceneId } = getQoreContextRequiredValues({
+    const { nickname, token, sceneId } = getQoreContextRequiredValues({
       context: { ...context, opts: obj },
-      connectionFields: ['username', 'token'],
+      connectionFields: ['nickname', 'token'],
       optionFields: ['sceneId'],
       ErrorClass: OpenHueError,
     });
 
     const data = await openHueApiClient<{ data: Array<{ rid: string; rtype: string }> }>({
-      username,
+      nickname,
       token,
       path: `resource/scene/${sceneId}`,
       method: 'DELETE',

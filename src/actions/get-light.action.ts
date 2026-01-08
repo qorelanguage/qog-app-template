@@ -24,15 +24,15 @@ const GetLight = QoreAppCreator.createAction({
   desc: 'Get a specific light',
   options,
   api_function: async (obj, _options, context) => {
-    const { username, token, lightId } = getQoreContextRequiredValues({
+    const { nickname, token, lightId } = getQoreContextRequiredValues({
       context: { ...context, opts: obj },
-      connectionFields: ['username', 'token'],
+      connectionFields: ['nickname', 'token'],
       optionFields: ['lightId'],
       ErrorClass: OpenHueError,
     });
 
     const data = await openHueApiClient<Record<string, any>[]>({
-      username,
+      nickname,
       token,
       object: 'data',
       path: `resource/light/${lightId}`,

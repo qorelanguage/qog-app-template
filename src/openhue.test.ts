@@ -1,8 +1,8 @@
 import { configDotenv } from 'dotenv';
 import { GetLight } from './actions';
 import { getOpenHueDeviceAllowedValues } from './helpers/get-device-allowed-values';
-import { getOpenHueLightAllowedValues } from './helpers/get-light-allowed-values';
 import { getOpenHueGroupedLightAllowedValues } from './helpers/get-grouped-light-allowed-values';
+import { getOpenHueLightAllowedValues } from './helpers/get-light-allowed-values';
 import { getOpenHueRoomAllowedValues } from './helpers/get-room-allowed-values';
 import { getOpenHueSceneAllowedValues } from './helpers/get-scene-allowed-values';
 import { getOpenHueZoneAllowedValues } from './helpers/get-zone-allowed-values';
@@ -12,26 +12,26 @@ configDotenv({ path: '.env' });
 const baseContext = {
   connt_opts: {
     token: '',
-    username: '',
+    nickname: '',
   },
 } as Record<string, any>;
 
 describe('Openhue', () => {
   beforeAll(() => {
     const token = process.env.OPENHUE_TOKEN;
-    const username = process.env.OPENHUE_USERNAME;
+    const nickname = process.env.OPENHUE_nickname;
 
     if (!token) {
       throw new Error('No OPENHUE_TOKEN provided');
     }
 
-    if (!username) {
-      throw new Error('No OPENHUE_USERNAME provided');
+    if (!nickname) {
+      throw new Error('No OPENHUE_nickname provided');
     }
 
     baseContext.conn_opts = {
       token,
-      username,
+      nickname,
     };
   });
 

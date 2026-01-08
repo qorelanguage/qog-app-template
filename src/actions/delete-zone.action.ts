@@ -24,15 +24,15 @@ const DeleteZone = QoreAppCreator.createAction({
   desc: 'Permanently delete a zone from your Philips Hue system',
   options,
   api_function: async (obj, _options, context) => {
-    const { username, token, zoneId } = getQoreContextRequiredValues({
+    const { nickname, token, zoneId } = getQoreContextRequiredValues({
       context: { ...context, opts: obj },
-      connectionFields: ['username', 'token'],
+      connectionFields: ['nickname', 'token'],
       optionFields: ['zoneId'],
       ErrorClass: OpenHueError,
     });
 
     const data = await openHueApiClient<{ data: Array<{ rid: string; rtype: string }> }>({
-      username,
+      nickname,
       token,
       path: `resource/zone/${zoneId}`,
       method: 'DELETE',

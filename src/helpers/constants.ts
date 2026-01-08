@@ -80,7 +80,7 @@ type QorusResponse<T> = {
 
 type TOpenHueRequestOptions = {
   token: string;
-  username: string;
+  nickname: string;
   path: string;
   object?: string;
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -116,7 +116,7 @@ const formatPath = (path: string): string => {
 export const openHueApiClient = async <ResponseType = unknown>(
   options: TOpenHueRequestOptions
 ): Promise<ResponseType> => {
-  const { token, path, object, method = 'GET', body, params, username } = options;
+  const { token, path, object, method = 'GET', body, params, nickname } = options;
 
   const formattedPath = formatPath(path);
 
@@ -126,7 +126,7 @@ export const openHueApiClient = async <ResponseType = unknown>(
     const requestConfig = {
       headers: {
         Authorization: `Bearer ${token}`,
-        'hue-application-key': username,
+        'hue-application-key': nickname,
         ...(options.headers && { ...options.headers }),
       },
       path: formattedPath,
@@ -185,7 +185,7 @@ export const fetchOpenHuePaginatedRecords = async <
 >(
   options: TOpenHuePaginatedOptions
 ): Promise<ItemType[]> => {
-  const { token, object = 'data', method = 'GET', body, username, path } = options;
+  const { token, object = 'data', method = 'GET', body, nickname, path } = options;
 
   const items: ItemType[] = [];
 
@@ -194,7 +194,7 @@ export const fetchOpenHuePaginatedRecords = async <
       token,
       path,
       method,
-      username,
+      nickname,
       params: {
         ...options.params,
       },

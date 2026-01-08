@@ -84,9 +84,9 @@ const CreateRoom = QoreAppCreator.createAction({
   desc: 'Create a new room and assign devices to it for organized control',
   options,
   api_function: async (obj, _options, context) => {
-    const { username, token, name, archetype, children } = getQoreContextRequiredValues({
+    const { nickname, token, name, archetype, children } = getQoreContextRequiredValues({
       context: { ...context, opts: obj },
-      connectionFields: ['username', 'token'],
+      connectionFields: ['nickname', 'token'],
       optionFields: ['name', 'archetype', 'children'],
       ErrorClass: OpenHueError,
     });
@@ -104,7 +104,7 @@ const CreateRoom = QoreAppCreator.createAction({
     };
 
     const data = await openHueApiClient<{ data: Array<{ rid: string; rtype: string }> }>({
-      username,
+      nickname,
       token,
       path: 'resource/room',
       method: 'POST',

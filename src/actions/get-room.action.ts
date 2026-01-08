@@ -24,15 +24,15 @@ const GetRoom = QoreAppCreator.createAction({
   desc: 'Retrieve detailed information about a specific room including its devices and services',
   options,
   api_function: async (obj, _options, context) => {
-    const { username, token, roomId } = getQoreContextRequiredValues({
+    const { nickname, token, roomId } = getQoreContextRequiredValues({
       context: { ...context, opts: obj },
-      connectionFields: ['username', 'token'],
+      connectionFields: ['nickname', 'token'],
       optionFields: ['roomId'],
       ErrorClass: OpenHueError,
     });
 
     const data = await openHueApiClient<Record<string, any>[]>({
-      username,
+      nickname,
       token,
       object: 'data',
       path: `resource/room/${roomId}`,

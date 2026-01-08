@@ -12,15 +12,9 @@ export class OpenHueError extends Error {
 }
 
 export const OPENHUE_CONN_OPTIONS = {
-  username: {
+  nickname: {
     type: 'string',
     display_name: 'Application Key',
-  },
-  is_button_pressed: {
-    type: 'bool',
-    display_name: 'Link Button Pressed',
-    short_desc: 'Have you pressed the link button on your Hue Bridge?',
-    desc: `Before creating the connection, please make sure you have pressed the link button on your Hue Bridge.`,
   },
 } satisfies TCustomConnOptions;
 

@@ -30,7 +30,7 @@ const CustomApp = QoreAppCreator.createApp({
     url: 'https://api.meethue.com',
     ping_path: '/route/clip/v2/resource/device',
     ping_headers: {
-      username: '{{username}}',
+      nickname: '{{nickname}}',
     },
   },
   rest_modifiers: {
@@ -43,7 +43,7 @@ const CustomApp = QoreAppCreator.createApp({
         title: '',
       },
     ],
-    url_template_options: ['username'],
+    url_template_options: ['nickname'],
     set_options_post_auth: async (context) => {
       const { token } = getQoreContextRequiredValues({
         context,
@@ -66,10 +66,10 @@ const CustomApp = QoreAppCreator.createApp({
         OPENHUE_ENDPOINT_CONFIG
       );
 
-      const usernameResponse = await QorusRequest.post<{
+      const nicknameResponse = await QorusRequest.post<{
         data: {
           success: {
-            username: string;
+            nickname: string;
           };
         };
       }>(
@@ -83,10 +83,10 @@ const CustomApp = QoreAppCreator.createApp({
         OPENHUE_ENDPOINT_CONFIG
       );
 
-      const username = usernameResponse?.data.success.username;
+      const nickname = nicknameResponse?.data.success.nickname;
 
       return {
-        username,
+        nickname,
       };
     },
   },

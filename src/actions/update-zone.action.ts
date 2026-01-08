@@ -1,8 +1,8 @@
 import { EQoreAppActionCode, QoreAppCreator, TQoreOptions } from '@qoretechnologies/ts-toolkit';
 import { OPENHUE_APP_NAME, OpenHueError } from '../constants';
 import { getQoreContextRequiredValues, openHueApiClient } from '../helpers/constants';
-import { getOpenHueZoneAllowedValues } from '../helpers/get-zone-allowed-values';
 import { getOpenHueLightAllowedValues } from '../helpers/get-light-allowed-values';
+import { getOpenHueZoneAllowedValues } from '../helpers/get-zone-allowed-values';
 
 const options = {
   zoneId: {
@@ -93,9 +93,9 @@ const UpdateZone = QoreAppCreator.createAction({
   desc: 'Update the name, type, or lights in an existing zone',
   options,
   api_function: async (obj, _options, context) => {
-    const { username, token, zoneId } = getQoreContextRequiredValues({
+    const { nickname, token, zoneId } = getQoreContextRequiredValues({
       context: { ...context, opts: obj },
-      connectionFields: ['username', 'token'],
+      connectionFields: ['nickname', 'token'],
       optionFields: ['zoneId'],
       ErrorClass: OpenHueError,
     });
@@ -120,7 +120,7 @@ const UpdateZone = QoreAppCreator.createAction({
     }
 
     const data = await openHueApiClient<{ data: Array<{ rid: string; rtype: string }> }>({
-      username,
+      nickname,
       token,
       path: `resource/zone/${zoneId}`,
       method: 'PUT',

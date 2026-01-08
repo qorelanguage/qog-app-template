@@ -29,15 +29,15 @@ export const getOpenHueLightAllowedValues: TQoreGetAllowedValuesFunction<
   TCustomConnOptions,
   string
 > = async (context) => {
-  const { token, username } = getQoreContextRequiredValues({
+  const { token, nickname } = getQoreContextRequiredValues({
     context,
-    connectionFields: ['token', 'username'],
+    connectionFields: ['token', 'nickname'],
     ErrorClass: OpenHueError,
   });
 
   return await fetchOpenHueAllowedValues<TOpenHueItem>({
     token,
-    username,
+    nickname,
     path: `resource/light`,
     object: 'data',
     mapItemToAllowedValue: mapOpenHueItemToAllowedValue,

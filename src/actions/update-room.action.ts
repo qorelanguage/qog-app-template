@@ -1,8 +1,8 @@
 import { EQoreAppActionCode, QoreAppCreator, TQoreOptions } from '@qoretechnologies/ts-toolkit';
 import { OPENHUE_APP_NAME, OpenHueError } from '../constants';
 import { getQoreContextRequiredValues, openHueApiClient } from '../helpers/constants';
-import { getOpenHueRoomAllowedValues } from '../helpers/get-room-allowed-values';
 import { getOpenHueDeviceAllowedValues } from '../helpers/get-device-allowed-values';
+import { getOpenHueRoomAllowedValues } from '../helpers/get-room-allowed-values';
 
 const options = {
   roomId: {
@@ -93,9 +93,9 @@ const UpdateRoom = QoreAppCreator.createAction({
   desc: 'Update the name, type, or devices in an existing room',
   options,
   api_function: async (obj, _options, context) => {
-    const { username, token, roomId } = getQoreContextRequiredValues({
+    const { nickname, token, roomId } = getQoreContextRequiredValues({
       context: { ...context, opts: obj },
-      connectionFields: ['username', 'token'],
+      connectionFields: ['nickname', 'token'],
       optionFields: ['roomId'],
       ErrorClass: OpenHueError,
     });
@@ -120,7 +120,7 @@ const UpdateRoom = QoreAppCreator.createAction({
     }
 
     const data = await openHueApiClient<{ data: Array<{ rid: string; rtype: string }> }>({
-      username,
+      nickname,
       token,
       path: `resource/room/${roomId}`,
       method: 'PUT',

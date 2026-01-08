@@ -88,9 +88,9 @@ const UpdateLight = QoreAppCreator.createAction({
   desc: 'Update the state, brightness, color, or effects of a Philips Hue light',
   options,
   api_function: async (obj, _options, context) => {
-    const { username, token, lightId } = getQoreContextRequiredValues({
+    const { nickname, token, lightId } = getQoreContextRequiredValues({
       context: { ...context, opts: obj },
-      connectionFields: ['username', 'token'],
+      connectionFields: ['nickname', 'token'],
       optionFields: ['lightId'],
       ErrorClass: OpenHueError,
     });
@@ -127,7 +127,7 @@ const UpdateLight = QoreAppCreator.createAction({
     }
 
     const data = await openHueApiClient<{ data: Array<{ rid: string; rtype: string }> }>({
-      username,
+      nickname,
       token,
       path: `resource/light/${lightId}`,
       method: 'PUT',

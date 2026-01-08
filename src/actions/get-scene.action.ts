@@ -24,15 +24,15 @@ const GetScene = QoreAppCreator.createAction({
   desc: 'Retrieve detailed information about a specific scene including its actions and configuration',
   options,
   api_function: async (obj, _options, context) => {
-    const { username, token, sceneId } = getQoreContextRequiredValues({
+    const { nickname, token, sceneId } = getQoreContextRequiredValues({
       context: { ...context, opts: obj },
-      connectionFields: ['username', 'token'],
+      connectionFields: ['nickname', 'token'],
       optionFields: ['sceneId'],
       ErrorClass: OpenHueError,
     });
 
     const data = await openHueApiClient<Record<string, any>[]>({
-      username,
+      nickname,
       token,
       object: 'data',
       path: `resource/scene/${sceneId}`,

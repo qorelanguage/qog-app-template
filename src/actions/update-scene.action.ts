@@ -45,9 +45,9 @@ const UpdateScene = QoreAppCreator.createAction({
   desc: 'Update the configuration and settings of an existing scene',
   options,
   api_function: async (obj, _options, context) => {
-    const { username, token, sceneId } = getQoreContextRequiredValues({
+    const { nickname, token, sceneId } = getQoreContextRequiredValues({
       context: { ...context, opts: obj },
-      connectionFields: ['username', 'token'],
+      connectionFields: ['nickname', 'token'],
       optionFields: ['sceneId'],
       ErrorClass: OpenHueError,
     });
@@ -67,7 +67,7 @@ const UpdateScene = QoreAppCreator.createAction({
     }
 
     const data = await openHueApiClient<{ data: Array<{ rid: string; rtype: string }> }>({
-      username,
+      nickname,
       token,
       path: `resource/scene/${sceneId}`,
       method: 'PUT',
